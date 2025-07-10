@@ -28,9 +28,8 @@ const Header = () => {
               alt="user photo"
             />
           </button>
-          {/* Dropdown menu */}
           <div
-            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"
+            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600 -translate-x-10"
             id="user-dropdown"
           >
             <div className="px-4 py-3">
