@@ -8,6 +8,7 @@ import ProductModal from "./Modal/ProductModal";
 import { setFavorite, deleteFavourite } from "../redux/favoriteSlice";
 import ProductCard from "./Product/ProductCard";
 import { setHistory } from "../redux/historySlice";
+import ProductSkeleton from "./Skeleton/ProductSkeleton";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -76,7 +77,15 @@ const Products = () => {
     }
   };
 
-  if (isLoading) return <p>Đang tải...</p>;
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <ProductSkeleton key={index} />
+        ))}
+      </div>
+    );
+  }
   if (error) return <p>Lỗi: {error}</p>;
 
   return (
@@ -98,7 +107,15 @@ const Products = () => {
         )}
       </div>
 
-      {isSuggestionsLoading && <p>Đang tải gợi ý...</p>}
+      {isSuggestionsLoading && (
+        <div className="col-span-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <ProductSkeleton key={index} />
+            ))}
+          </div>
+        </div>
+      )}
       {suggestionsError && <p>Lỗi gợi ý: {suggestionsError}</p>}
 
       {suggestions.length > 0 && (
