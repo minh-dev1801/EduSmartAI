@@ -8,7 +8,6 @@ interface ProductModalProps {
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
-  console.log({ product });
   if (!product) return null;
 
   return (
