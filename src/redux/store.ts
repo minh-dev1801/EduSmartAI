@@ -4,6 +4,7 @@ import searchReducer from "./searchSlice";
 import priceFilterReducer from "./priceSlice";
 import suggestionReducer from "./suggestionSlice";
 import favoriteReducer from "./favoriteSlice";
+import historyReducer from "./historySlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     priceFilter: priceFilterReducer,
     suggestion: suggestionReducer,
     favorite: favoriteReducer,
+    history: historyReducer,
   },
 });
 

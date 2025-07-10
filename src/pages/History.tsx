@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { Product } from "../types/product";
 import ProductModal from "../components/Modal/ProductModal";
 
-const Favorite = () => {
-  const favourite = useSelector((state: RootState) => state.favorite.items);
+const History = () => {
+  const historyList = useSelector((state: RootState) => state.history.items);
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -19,12 +19,15 @@ const Favorite = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <h2 className="mt-20 text-xl font-semibold">Sản phẩm yêu thích</h2>
+      <h2 className="mt-20 text-xl font-semibold">Lịch sử sản phẩm</h2>
       <div className="mt-2 border border-black roudned mb-10"></div>
-      {favourite.length > 0 ? (
+      {historyList.length > 0 ? (
         <>
-          {favourite.map((product) => (
-            <div key={product.id} className="bg-white shadow border border-gray-300 rounded-2xl">
+          {historyList.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white shadow border border-gray-300 rounded-2xl"
+            >
               <div className="p-4">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <p className="text-gray-600 truncate">{product.description}</p>
@@ -39,10 +42,10 @@ const Favorite = () => {
           ))}
         </>
       ) : (
-        <>Chưa có sản phẩm yêu thích</>
+        <>Chưa có lịch sử sản phẩm</>
       )}
       <ProductModal product={selectedProduct} onClose={handleCloseModal} />
     </div>
   );
 };
-export default Favorite;
+export default History;

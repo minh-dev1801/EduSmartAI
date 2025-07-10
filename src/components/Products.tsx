@@ -5,8 +5,9 @@ import { fetchProduct } from "../thunks/productThunk";
 import { clearSuggestions, fetchSuggestions } from "../redux/suggestionSlice";
 import type { Product } from "../types/product";
 import ProductModal from "./Modal/ProductModal";
-import { setFavorite } from "../redux/favoriteSlice";
-import { FaHeart } from "react-icons/fa";
+import { setFavorite, deleteFavourite } from "../redux/favoriteSlice";
+import ProductCard from "./Product/ProductCard";
+import { setHistory } from "../redux/historySlice";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,6 +23,9 @@ const Products = () => {
   const searchTerm = useSelector((state: RootState) => state.search.term);
   const priceRange = useSelector(
     (state: RootState) => state.priceFilter.selectedRange
+  );
+  const favouriteProducts = useSelector(
+    (state: RootState) => state.favorite.items
   );
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -48,11 +52,11 @@ const Products = () => {
       if (priceRange === "<500K") return price < 500000;
       if (priceRange === "500K-1M") return price >= 500000 && price <= 1000000;
       if (priceRange === ">1M") return price > 1000000;
-      return true;
     });
   }
 
   const handleViewDetails = (product: Product) => {
+    dispatch(setHistory(product));
     setSelectedProduct(product);
   };
 
@@ -60,8 +64,16 @@ const Products = () => {
     setSelectedProduct(null);
   };
 
+  const handleIsFavourite = (product: Product) =>
+    !!favouriteProducts.find((item) => item.id === product.id);
+
   const handleFavoriteProduct = (product: Product) => {
-    dispatch(setFavorite(product));
+    const isFavourite = handleIsFavourite(product);
+    if (!isFavourite) {
+      dispatch(setFavorite(product));
+    } else {
+      dispatch(deleteFavourite(product));
+    }
   };
 
   if (isLoading) return <p>Đang tải...</p>;
@@ -94,59 +106,31 @@ const Products = () => {
           <h2 className="col-span-full text-xl font-semibold mb-4">
             Sản phẩm gợi ý
           </h2>
-          {suggestions.map((product) => (
-            <div key={product.id} className="bg-white shadow rounded-2xl">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-auto mb-4 rounded-t-2xl"
+          {suggestions.map((product) => {
+            const isFavourite = handleIsFavourite(product);
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isFavourite={isFavourite}
+                onFavorite={handleFavoriteProduct}
+                onViewDetails={handleViewDetails}
               />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold">{product.name}</h3>
-                <p className="text-gray-600 truncate">{product.description}</p>
-
-                <button
-                  onClick={() => handleViewDetails(product)}
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
-                >
-                  Xem chi tiết
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </>
       )}
 
       {filteredProducts.map((product) => {
+        const isFavourite = handleIsFavourite(product);
         return (
-          <div
+          <ProductCard
             key={product.id}
-            className="bg-white shadow rounded-2xl relative"
-          >
-            <button
-              onClick={() => handleFavoriteProduct(product)}
-              className="absolute right-0 top-0 text-xl text-red-600 transition hover:text-red-500 cursor-pointer p-4"
-            >
-              <FaHeart />
-            </button>
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-auto mb-4 rounded-t-2xl "
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold">{product.name}</h3>
-              <p className="text-gray-600">{product.description}</p>
-              <div className="flex">
-                <button
-                  onClick={() => handleViewDetails(product)}
-                  className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
-                >
-                  Xem chi tiết
-                </button>
-              </div>
-            </div>
-          </div>
+            product={product}
+            isFavourite={isFavourite}
+            onFavorite={handleFavoriteProduct}
+            onViewDetails={handleViewDetails}
+          />
         );
       })}
 
