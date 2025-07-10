@@ -8,6 +8,13 @@ const Products = () => {
   const { items, isLoading, error } = useSelector(
     (state: RootState) => state.product
   );
+  const searchTerm = useSelector((state: RootState) => state.search.term);
+
+  const products = searchTerm
+    ? items.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : items;
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -18,7 +25,7 @@ const Products = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {items.map((product) => {
+      {products.map((product) => {
         return (
           <div key={product.id} className="bg-white shadow rounded-2xl">
             <img

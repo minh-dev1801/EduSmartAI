@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="mt-10">
-        <Search/>
+        <Search />
       </div>
       <div className="mt-10">
         <h1 className="text-2xl font-semibold mb-5">Khóa học</h1>
