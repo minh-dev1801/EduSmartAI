@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../redux/store";
 import { fetchProduct } from "../thunks/productThunk";
 import { clearSuggestions, fetchSuggestions } from "../redux/suggestionSlice";
+import type { Product } from "../types/product";
+import ProductModal from "./Modal/ProductModal";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +21,8 @@ const Products = () => {
   const priceRange = useSelector(
     (state: RootState) => state.priceFilter.selectedRange
   );
+
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -45,6 +49,15 @@ const Products = () => {
       return true;
     });
   }
+
+  const handleViewDetails = (product: Product) => {
+    console.log({product});
+    setSelectedProduct(product);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+  };
 
   if (isLoading) return <p>Đang tải...</p>;
   if (error) return <p>Lỗi: {error}</p>;
@@ -85,11 +98,11 @@ const Products = () => {
               />
               <div className="p-4">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
-                <p className="text-gray-600">{product.description}</p>
-                <p className="text-blue-600 font-medium mt-2">
-                  {product.price.toLocaleString("vi-VN")} VNĐ
-                </p>
-                <button className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded">
+                <p className="text-gray-600 truncate">{product.description}</p>
+                <button
+                  onClick={() => handleViewDetails(product)}
+                  className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
+                >
                   Xem chi tiết
                 </button>
               </div>
@@ -109,13 +122,18 @@ const Products = () => {
             <div className="p-4">
               <h3 className="text-xl font-semibold">{product.name}</h3>
               <p className="text-gray-600">{product.description}</p>
-              <button className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded">
+              <button
+                onClick={() => handleViewDetails(product)}
+                className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
+              >
                 Xem chi tiết
               </button>
             </div>
           </div>
         );
       })}
+
+      <ProductModal product={selectedProduct} onClose={handleCloseModal} />
     </div>
   );
 };

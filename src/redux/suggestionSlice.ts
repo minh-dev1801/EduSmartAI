@@ -1,14 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-}
+import type { Product } from "../types/product";
 
 interface SuggestionState {
   suggestions: Product[];
@@ -29,8 +22,10 @@ export const fetchSuggestions = createAsyncThunk(
       const response = await axios.get(
         `https://686e53dcc9090c495389338e.mockapi.io/api/suggestion?userId=${userId}`
       );
-     
+
       const data = response.data;
+
+      console.log({ data });
       return data;
     } catch (error) {
       if (error instanceof AxiosError) return rejectWithValue(error.message);

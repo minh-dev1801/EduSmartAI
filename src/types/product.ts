@@ -4,6 +4,8 @@ export type Product = {
   price: number;
   image: string;
   description: string;
+  rating: number;
+  reviews: string[];
 };
 
 export type ProductState = {
