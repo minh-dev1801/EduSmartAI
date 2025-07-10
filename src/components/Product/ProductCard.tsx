@@ -20,7 +20,7 @@ const ProductCard = ({
         onClick={() => onFavorite(product)}
         className={`absolute right-0 top-0 text-xl ${
           isFavourite ? "text-red-500" : "text-gray-200 hover:text-gray-300"
-        } transition hover:text-gray-300 cursor-pointer p-4`}
+        } transition-all hover:scale-125 cursor-pointer p-4`}
       >
         <FaHeart />
       </button>

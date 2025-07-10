@@ -1,7 +1,13 @@
 import AllRoute from "./router/AllRoutes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  return <AllRoute />;
+  return (
+    <div>
+      <AllRoute />
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default App;

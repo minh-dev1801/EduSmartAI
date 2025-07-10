@@ -9,6 +9,8 @@ import { setFavorite, deleteFavourite } from "../redux/favoriteSlice";
 import ProductCard from "./Product/ProductCard";
 import { setHistory } from "../redux/historySlice";
 import ProductSkeleton from "./Skeleton/ProductSkeleton";
+import ProductError from "./Error/ProductError";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -71,8 +73,10 @@ const Products = () => {
   const handleFavoriteProduct = (product: Product) => {
     const isFavourite = handleIsFavourite(product);
     if (!isFavourite) {
+      toast.success("🦄 Bạn đã thích một sản phẩm !!!");
       dispatch(setFavorite(product));
     } else {
+      toast.info("🦄 Bạn đã bỏ thích một sản phẩm !!!");
       dispatch(deleteFavourite(product));
     }
   };
@@ -86,7 +90,7 @@ const Products = () => {
       </div>
     );
   }
-  if (error) return <p>Lỗi: {error}</p>;
+  if (error) return <ProductError />;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -116,7 +120,7 @@ const Products = () => {
           </div>
         </div>
       )}
-      {suggestionsError && <p>Lỗi gợi ý: {suggestionsError}</p>}
+      {suggestionsError && <ProductError />}
 
       {suggestions.length > 0 && (
         <>
