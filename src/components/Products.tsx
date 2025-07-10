@@ -5,6 +5,8 @@ import { fetchProduct } from "../thunks/productThunk";
 import { clearSuggestions, fetchSuggestions } from "../redux/suggestionSlice";
 import type { Product } from "../types/product";
 import ProductModal from "./Modal/ProductModal";
+import { setFavorite } from "../redux/favoriteSlice";
+import { FaHeart } from "react-icons/fa";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -51,12 +53,15 @@ const Products = () => {
   }
 
   const handleViewDetails = (product: Product) => {
-    console.log({product});
     setSelectedProduct(product);
   };
 
   const handleCloseModal = () => {
     setSelectedProduct(null);
+  };
+
+  const handleFavoriteProduct = (product: Product) => {
+    dispatch(setFavorite(product));
   };
 
   if (isLoading) return <p>Đang tải...</p>;
@@ -99,6 +104,7 @@ const Products = () => {
               <div className="p-4">
                 <h3 className="text-xl font-semibold">{product.name}</h3>
                 <p className="text-gray-600 truncate">{product.description}</p>
+
                 <button
                   onClick={() => handleViewDetails(product)}
                   className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
@@ -113,7 +119,16 @@ const Products = () => {
 
       {filteredProducts.map((product) => {
         return (
-          <div key={product.id} className="bg-white shadow rounded-2xl">
+          <div
+            key={product.id}
+            className="bg-white shadow rounded-2xl relative"
+          >
+            <button
+              onClick={() => handleFavoriteProduct(product)}
+              className="absolute right-0 top-0 text-xl text-red-600 transition hover:text-red-500 cursor-pointer p-4"
+            >
+              <FaHeart />
+            </button>
             <img
               src={product.image}
               alt={product.name}
@@ -122,12 +137,14 @@ const Products = () => {
             <div className="p-4">
               <h3 className="text-xl font-semibold">{product.name}</h3>
               <p className="text-gray-600">{product.description}</p>
-              <button
-                onClick={() => handleViewDetails(product)}
-                className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
-              >
-                Xem chi tiết
-              </button>
+              <div className="flex">
+                <button
+                  onClick={() => handleViewDetails(product)}
+                  className="mt-4 bg-blue-500 hover:bg-blue-600 transition cursor-pointer text-white py-2 px-4 rounded"
+                >
+                  Xem chi tiết
+                </button>
+              </div>
             </div>
           </div>
         );

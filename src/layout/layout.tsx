@@ -4,7 +4,9 @@ import Header from "../components/Header";
 export function Layout() {
   return (
     <main className="min-h-screen ">
-      <Header />
+      <div className="mb-40">
+        <Header />
+      </div>
       <Outlet />
     </main>
   );

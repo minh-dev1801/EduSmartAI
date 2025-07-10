@@ -5,9 +5,7 @@ import Search from "../components/Search";
 const Home = () => {
   return (
     <div className="container mx-auto px-4">
-      <div className="mt-10">
-        <Search />
-      </div>
+      <Search />
       <div className="mt-10">
         <div className="flex mb-5 gap-10">
           <h1 className="text-2xl font-semibold">Khóa học</h1>
