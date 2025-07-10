@@ -1,3 +1,4 @@
+import PriceFilter from "../components/PriceFilter";
 import Products from "../components/Products";
 import Search from "../components/Search";
 
@@ -8,7 +9,10 @@ const Home = () => {
         <Search />
       </div>
       <div className="mt-10">
-        <h1 className="text-2xl font-semibold mb-5">Khóa học</h1>
+        <div className="flex mb-5 gap-10">
+          <h1 className="text-2xl font-semibold">Khóa học</h1>
+          <PriceFilter />
+        </div>
         <Products />
       </div>
     </div>
