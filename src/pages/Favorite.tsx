@@ -20,7 +20,7 @@ const Favorite = () => {
   return (
     <div className="container mx-auto px-4">
       <h2 className="mt-20 text-xl font-semibold">Sản phẩm yêu thích</h2>
-      <div className="mt-2 border border-black roudned mb-10"></div>
+      <div className="mt-2 h-[1px] bg-gray-300 roudned mb-4 md:mb-10"></div>
       {favourite.length > 0 ? (
         <>
           {favourite.map((product) => (

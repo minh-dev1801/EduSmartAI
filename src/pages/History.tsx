@@ -20,7 +20,7 @@ const History = () => {
   return (
     <div className="container mx-auto px-4">
       <h2 className="mt-20 text-xl font-semibold">Lịch sử sản phẩm</h2>
-      <div className="mt-2 border border-black roudned mb-10"></div>
+      <div className="mt-2 h-[1px] bg-gray-300 roudned mb-4 md:mb-10"></div>
       {historyList.length > 0 ? (
         <>
           {historyList.map((product) => (
@@ -42,7 +42,7 @@ const History = () => {
           ))}
         </>
       ) : (
-        <>Chưa có lịch sử sản phẩm</>
+        <>Chưa có sản phẩm</>
       )}
       <ProductModal product={selectedProduct} onClose={handleCloseModal} />
     </div>

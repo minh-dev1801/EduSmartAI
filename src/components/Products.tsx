@@ -93,18 +93,18 @@ const Products = () => {
   if (error) return <ProductError />;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div className="col-span-full mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+      <div className="col-span-full md:mb-6">
         <button
           onClick={handleFetchSuggestions}
-          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all cursor-pointer"
         >
           Gợi ý sản phẩm phù hợp
         </button>
         {suggestions.length > 0 && (
           <button
             onClick={() => dispatch(clearSuggestions())}
-            className="ml-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+            className="ml-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all cursor-pointer"
           >
             Xóa gợi ý
           </button>

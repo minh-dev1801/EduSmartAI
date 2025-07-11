@@ -84,7 +84,7 @@ const Chatbot: React.FC = () => {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-[6rem] right-5 w-[24rem] h-[450px] bg-white rounded-lg shadow-2xl flex flex-col transition-all z-100">
+        <div className="fixed bottom-[6rem] right-5 w-[20rem] md:w-[24rem] h-[25rem] md:h-[450px] bg-white rounded-lg shadow-2xl flex flex-col transition-all z-100">
           <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div className="flex items-center gap-2">
               <FaRobot className="w-6 h-6" />
