@@ -65,23 +65,16 @@ const Chatbot: React.FC = () => {
 
   return (
     <>
-      {!isOpen && (
-        <button
-          onClick={toggleChat}
-          className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all cursor-pointer"
-        >
-          <ChatBotIcon className="h-8 w-8" />
-        </button>
-      )}
-
-      {isOpen && (
-        <button
-          onClick={toggleChat}
-          className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all cursor-pointer"
-        >
-          <MdClose className="w-8 h-8" />
-        </button>
-      )}
+      <button
+        onClick={toggleChat}
+        className="fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all cursor-pointer hover:bg-blue-500"
+      >
+        {isOpen ? (
+          <MdClose className="w-6 h-6" />
+        ) : (
+          <ChatBotIcon className="w-6 h-6" />
+        )}
+      </button>
 
       {isOpen && (
         <div className="fixed bottom-[6rem] right-5 w-[20rem] md:w-[24rem] h-[25rem] md:h-[450px] bg-white rounded-lg shadow-2xl flex flex-col transition-all z-100">
