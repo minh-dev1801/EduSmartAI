@@ -4,9 +4,8 @@ import type { AppDispatch, RootState } from "../redux/store";
 import { fetchProduct } from "../thunks/productThunk";
 import type { Product } from "../types/product";
 import ProductModal from "./Modal/ProductModal";
-import { fetchFavourite } from "../redux/favoriteSlice";
 import ProductCard from "./Product/ProductCard";
-import { setHistory } from "../redux/historySlice";
+import { postHistory } from "../redux/historySlice";
 import ProductSkeleton from "./Skeleton/ProductSkeleton";
 import ProductError from "./Error/ProductError";
 import { toast } from "react-toastify";
@@ -16,6 +15,11 @@ import {
   fetchSuggestions,
   postSuggest,
 } from "../redux/suggestionSlice";
+import {
+  deleteFavourite,
+  fetchFavourite,
+  postFavourite,
+} from "../redux/favoriteSlice";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,9 +30,17 @@ const Products = () => {
     error,
   } = useSelector((state: RootState) => state.product);
 
-  const { suggestions, isVisible: suggestionIsVisible } = useSelector(
-    (state: RootState) => state.suggestion
-  );
+  const {
+    isLoading: suggestionLoading,
+    error: suggestionsError,
+    isVisible: suggestionIsVisible,
+  } = useSelector((state: RootState) => state.suggestion);
+
+  const {
+    items: favourites,
+    isLoading: favouriteLoading,
+    error: favouriteError,
+  } = useSelector((state: RootState) => state.favorite);
 
   const searchTerm = useSelector((state: RootState) => state.search.term);
   const priceRange = useSelector(
@@ -40,8 +52,8 @@ const Products = () => {
   useEffect(() => {
     const userId = "1";
     dispatch(fetchProduct());
-    dispatch(fetchFavourite(userId));
     dispatch(fetchSuggestions(userId));
+    dispatch(fetchFavourite(userId));
   }, [dispatch]);
 
   let filteredProducts = products;
@@ -61,7 +73,8 @@ const Products = () => {
   }
 
   const handleViewDetails = (product: Product) => {
-    dispatch(setHistory(product));
+    dispatch(postHistory(product));
+    dispatch(postSuggest([product]));
     setSelectedProduct(product);
   };
 
@@ -70,7 +83,7 @@ const Products = () => {
   };
 
   const handleIsFavourite = (product: Product) => {
-    return !!suggestions.find((item) => +item.id === +product.id);
+    return !!favourites.find((item) => +item.id === +product.id);
   };
 
   const handleFavoriteProduct = (product: Product) => {
@@ -78,22 +91,24 @@ const Products = () => {
     if (!isFavourite) {
       toast.success("Bạn đã thích một sản phẩm !!!");
       dispatch(postSuggest([product]));
+      dispatch(postFavourite(product));
     } else {
       toast.info("Bạn đã bỏ thích một sản phẩm !!!");
       dispatch(deleteSuggest(String(product.id)));
+      dispatch(deleteFavourite(String(product.id)));
     }
   };
 
-  if (isLoading) {
+  if (isLoading || suggestionLoading || favouriteLoading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
         {Array.from({ length: 4 }).map((_, index) => (
           <ProductSkeleton key={index} />
         ))}
       </div>
     );
   }
-  if (error) return <ProductError />;
+  if (error || suggestionsError || favouriteError) return <ProductError />;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
