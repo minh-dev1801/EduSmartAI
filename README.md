@@ -1,6 +1,6 @@
 # Edu smart ai
 
-![Demo](demo.png)
+![Demo](./demo.png)
 
 ## Features
 
