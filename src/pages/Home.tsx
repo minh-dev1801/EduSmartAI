@@ -1,5 +1,5 @@
 import PriceFilter from "../components/PriceFilter";
-import Products from "../components/Products";
+import Products from "../components/Product/Product";
 import Search from "../components/Search";
 
 const Home = () => {
@@ -8,7 +8,9 @@ const Home = () => {
       <Search />
       <div className="mt-[22px] md:mt-10">
         <div className="flex mb-5 gap-5 md:gap-10">
-          <h1 className="text-lg md:text-2xl font-semibold whitespace-nowrap">Khóa học</h1>
+          <h1 className="text-lg md:text-2xl font-semibold whitespace-nowrap">
+            Khóa học
+          </h1>
           <PriceFilter />
         </div>
         <Products />

@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../redux/store";
-import { fetchProduct } from "../thunks/productThunk";
-import type { Product } from "../types/product";
-import ProductModal from "./Modal/ProductModal";
-import ProductCard from "./Product/ProductCard";
-import { postHistory } from "../redux/historySlice";
-import ProductSkeleton from "./Skeleton/ProductSkeleton";
-import ProductError from "./Error/ProductError";
-import { toast } from "react-toastify";
-import SuggestProduct from "./Product/SuggestProduct";
+import type { AppDispatch, RootState } from "../../redux/store";
+import type { Product } from "../../types/product";
+import { fetchProduct } from "../../thunks/productThunk";
 import {
   deleteSuggest,
   fetchSuggestions,
   postSuggest,
-} from "../redux/suggestionSlice";
+} from "../../thunks/suggestThunk";
 import {
   deleteFavourite,
   fetchFavourite,
   postFavourite,
-} from "../redux/favoriteSlice";
+} from "../../thunks/favouriteThunk";
+import { postHistory } from "../../thunks/historyThunk";
+import { toast } from "react-toastify";
+import ProductSkeleton from "../Skeleton/ProductSkeleton";
+import ProductError from "../Error/ProductError";
+import SuggestProduct from "./SuggestProduct";
+import ProductCard from "./ProductCard";
+import ProductModal from "../Modal/ProductModal";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -11,6 +11,7 @@ const priceList = [
 
 const PriceFilter: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+
   const selectedRange = useSelector(
     (state: RootState) => state.priceFilter.selectedRange
   );
@@ -38,12 +39,6 @@ const PriceFilter: React.FC = () => {
           {price.name}
         </button>
       ))}
-      <button
-        onClick={() => dispatch(clearPriceRange())}
-        className="px-4 py-2 rounded-lg text-sm font-medium bg-red-100 text-red-700 hover:bg-red-200 transition cursor-pointer"
-      >
-        Xóa bộ lọc
-      </button>
     </div>
   );
 };

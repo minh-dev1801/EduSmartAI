@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { Product } from "../../types/product";
 import type { AppDispatch, RootState } from "../../redux/store";
-import { fetchSuggestions, setIsVisible } from "../../redux/suggestionSlice";
+import { setIsVisible } from "../../redux/suggestionSlice";
 import ProductSkeleton from "../Skeleton/ProductSkeleton";
 import ProductError from "../Error/ProductError";
 import ProductCard from "./ProductCard";
 import Empty from "../../Empty/Empty";
+import { fetchSuggestions } from "../../thunks/suggestThunk";
 
 interface SuggestedProductsProps {
   onFavorite: (product: Product) => void;

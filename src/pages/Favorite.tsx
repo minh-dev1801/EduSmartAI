@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import type { Product } from "../types/product";
 import ProductModal from "../components/Modal/ProductModal";
 import ProductError from "../components/Error/ProductError";
-import { fetchSuggestions } from "../redux/suggestionSlice";
+import { fetchSuggestions } from "../thunks/suggestThunk";
+
 
 const Favorite = () => {
   const dispatch = useDispatch<AppDispatch>();

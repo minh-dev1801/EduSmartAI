@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import type { Product } from "../types/product";
 import ProductModal from "../components/Modal/ProductModal";
 import ProductError from "../components/Error/ProductError";
-import { fetchHistory } from "../redux/historySlice";
+import { fetchHistory } from "../thunks/historyThunk";
+
 
 const History = () => {
   const dispatch = useDispatch<AppDispatch>();
