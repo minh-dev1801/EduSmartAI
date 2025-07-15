@@ -11,7 +11,7 @@ export function Layout() {
         <Header />
       </div>
       <Outlet />
-      <footer className="bg-gray-900 text-white py-10 border-t border-gray-700">
+      <footer className="bg-gray-900 text-white py-5 md:py-10">
         <Footer />
       </footer>
       <ScrollToTop />

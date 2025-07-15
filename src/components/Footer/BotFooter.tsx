@@ -3,7 +3,7 @@ const BotFooter = () => {
     <>
       <div className="py-6 mt-6 border-t-[1px] border-b-[1px] border-gray-700">
         <div className="mb-6">
-          <h3 className="font-semibold">
+          <h3 className="font-medium md:font-semibold">
             Công ty Giáo dục và Đào tạo ANTOREE INTERNATIONAL PTE. LTD. (MST:
             201436698Z)
           </h3>
@@ -13,7 +13,7 @@ const BotFooter = () => {
           </p>
         </div>
         <div>
-          <h3 className="font-semibold">
+          <h3 className="font-medium md:font-semibold">
             Đối tác đại diện tại Việt Nam: CÔNG TY TNHH PHÁT TRIỂN GIÁO DỤC
             ANTOREE (MST: 0313769851)
           </h3>
@@ -31,7 +31,7 @@ const BotFooter = () => {
         <h3 className="font-semibold mb-3 md:mb-0 text-white">
           © 2025 Antoree Pte.Ltd
         </h3>
-        <div className="flex gap-4 mr-12">
+        <div className="flex flex-col md:flex-row  md:gap-4 md:mr-12">
           <a href="#" className="hover:text-blue-400 transition-colors">
             Chính sách bảo mật
           </a>

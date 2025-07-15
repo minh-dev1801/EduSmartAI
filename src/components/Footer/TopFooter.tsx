@@ -9,9 +9,11 @@ import {
 
 const TopFooter = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
       <div className="space-y-2">
-        <h3 className="text-lg font-bold uppercase">Hỗ trợ khách hàng</h3>
+        <h3 className="text-md md:text-lg font-bold uppercase">
+          Hỗ trợ khách hàng
+        </h3>
         <div>
           <p className="font-semibold">Hotline:</p>
           <p>0877709376</p>
@@ -27,7 +29,9 @@ const TopFooter = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-bold uppercase">Thông tin dịch vụ</h3>
+        <h3 className="text-md md:text-lg font-bold uppercase">
+          Thông tin dịch vụ
+        </h3>
         <ul className="space-y-1">
           <li>
             <a href="#" className="hover:text-blue-400 transition-all">
@@ -58,7 +62,9 @@ const TopFooter = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-bold uppercase">Kết nối với Antoree</h3>
+        <h3 className="text-md md:text-lg font-bold uppercase">
+          Kết nối với Antoree
+        </h3>
         <p>
           <a href="#" className="hover:text-blue-400 transition-all">
             Cộng đồng
@@ -92,7 +98,7 @@ const TopFooter = () => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-bold uppercase">
+        <h3 className="text-md md:text-lg font-bold uppercase">
           Tải ứng dụng trên điện thoại
         </h3>
         <button className="flex items-center bg-white text-black px-4 py-2 rounded-lg transition-all hover:scale-105 w-full justify-center cursor-pointer">
