@@ -1,18 +1,18 @@
-# Welcome to React Router!
+# Edu smart ai
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+![Demo](demo.png)
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
+- 🚀 Display product list using MockAPI
+- ⚡️ Search for products by name and filter products by price
+- 📦 Smart suggestion button for products based on history and favorites
+- 🔄 Click to view details will show a modal with full product information
+- ⚡️ Allows marking favorites and saving history of viewed products
+- 🔒 Responsive for all screen sizes
 - 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- 🚀 Uses TypeScript
+- 🔒 Has skeleton loading, popups, and notifications
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ npm install
 
 ### Development
 
-Start the development server with HMR:
+Start the development server:
 
 ```bash
 npm run dev
@@ -44,44 +44,30 @@ npm run build
 
 ## Deployment
 
-### Docker Deployment
+### Vercel Deployment
 
-To build and run using Docker:
+Vercel is a great platform for deploying static frontend applications like this Vite + React project. It offers free hosting, automatic deployments, and custom domains.
 
-```bash
-docker build -t my-app .
+#### Prerequisites
 
-# Run the container
-docker run -p 3000:3000 my-app
-```
+- A Vercel account (sign up at [vercel.com](https://vercel.com/signup)).
+- Your project pushed to a Git repository (e.g., GitHub, GitLab, or Bitbucket).
 
-The containerized application can be deployed to any platform that supports Docker, including:
+#### Deployment Steps
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+1. **Import Your Project**:
 
-### DIY Deployment
+   - Go to the Vercel Dashboard: [vercel.com/dashboard](https://vercel.com/dashboard).
+   - Click "New Project" and import your repository from Git.
+   - Vercel will automatically detect your Vite project.
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+2. **Configure Build Settings** (usually auto-detected, but verify):
 
-Make sure to deploy the output of `npm run build`
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build` (or `vite build` if customized)
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install` (or `yarn install` if using Yarn)
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+3. **Deploy**:
+   - Click "Deploy". Vercel will build your project and provide a live URL (e.g., `your-project-name.vercel.app`).
+   - Future pushes to your Git main branch will trigger automatic redeployments.
